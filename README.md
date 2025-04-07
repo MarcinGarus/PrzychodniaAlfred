@@ -17,6 +17,6 @@ Aplikacja napisana w języku C# (Windows Forms), służąca do rejestracji pacje
 ## Struktura projektu
 
 ## Autor
-Projekt stworzony przez [Iga Gocył, Mateusz Kaczmarski, Marcin Garus] w ramach realizacji nauki przedmiotu Programowania obiektowe.
+Projekt stworzony przez [Iga Gocył, Mateusz Kaczmarczyk, Marcin Garus] w ramach realizacji nauki przedmiotu Programowania obiektowe.
 ## Licencja
 Projekt dostępny na licencji MIT. Możesz swobodnie używać, kopiować i modyfikować.

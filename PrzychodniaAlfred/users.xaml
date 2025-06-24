@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PrzychodniaAlfred.users"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Zarządzanie użytkownikami" Height="450" Width="700">
+        Title="Zarządzanie użytkownikami" Height="450" Width="700" Background="{x:Null}">
     <Grid Margin="10">
         <DataGrid x:Name="dgUzytkownicy"
                   AutoGenerateColumns="False"
@@ -23,7 +23,7 @@
             <Button Content="Odśwież" Width="80" Margin="5" Click="Odswiez_Click"/>
             <Button Content="Dodaj" Width="80" Margin="5" Click="Dodaj_Click"/>
             <Button Content="Usuń" Width="80" Margin="5" Click="Usun_Click"/>
-            <Button Content="Zapisz" Width="80" Margin="5" Click="Zapisz_Click"/>
+            <Button Content="Zapisz" Width="80" Margin="5" Click="Edytuj_Click"/>
         </StackPanel>
     </Grid>
 </Window>

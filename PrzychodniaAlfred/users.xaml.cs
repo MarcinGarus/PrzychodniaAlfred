@@ -64,7 +64,7 @@ namespace PrzychodniaAlfred
             {
                 try
                 {
-                    var response = await httpClient.PostAsync("https://kineh.smallhost.pl/przychodnia/usunuser.php",
+                    var response = await _httpClient.PostAsync("https://kineh.smallhost.pl/przychodnia/usunuser.php",
                         new StringContent(JsonSerializer.Serialize(new { id = zaznaczony.Id }), Encoding.UTF8, "application/json"));
 
                     var wynik = JsonSerializer.Deserialize<ApiResponse>(await response.Content.ReadAsStringAsync());
@@ -104,6 +104,10 @@ namespace PrzychodniaAlfred
         {
             MessageBox.Show("Tu będzie zapisywanie zmian do bazy przez API (do zrobienia 🚧)");
         }
-
+        public class ApiResponse
+        {
+            public bool success { get; set; }
+            public string message { get; set; }
+        }
     }
 }

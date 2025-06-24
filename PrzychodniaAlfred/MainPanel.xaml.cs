@@ -51,5 +51,10 @@ namespace PrzychodniaAlfred
             new MainWindow().Show();
             Close();
         }
+
+        private void btnWizyty_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

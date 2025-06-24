@@ -1,15 +1,15 @@
 ﻿<Window x:Class="PrzychodniaAlfred.MainPanel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Panel główny" Height="450" Width="800">
+        Title="Panel główny" Height="450" Width="800" WindowStyle="None" Background="{Binding Background, ElementName=stackPanel}">
     <DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="#FFEEEEEE" Margin="10">
+        <StackPanel x:Name="stackPanel" Orientation="Horizontal" DockPanel.Dock="Top" Background="#FF96A4F3" Margin="10">
             <TextBlock x:Name="txtZalogowanoJako" FontWeight="Bold" Foreground="DarkSlateGray" VerticalAlignment="Center"/>
         </StackPanel>
 
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="btnZarzadzajUzytkownikami" Content="Użytkownicy" Margin="5" Width="150" Height="50"/>
-            <Button x:Name="btnWizyty" Content="Wizyty" Margin="5" Width="150" Height="50"/>
+            <Button x:Name="btnWizyty" Content="Wizyty" Margin="5" Width="150" Height="50" Click="btnWizyty_Click"/>
             <Button x:Name="btnUrlopy" Content="Urlopy" Margin="5" Width="150" Height="50"/>
             <Button x:Name="btnStatystyki" Content="Statystyki" Margin="5" Width="150" Height="50"/>
             <Button x:Name="btnWyloguj" Content="Wyloguj" Margin="5" Width="150" Height="50"/>

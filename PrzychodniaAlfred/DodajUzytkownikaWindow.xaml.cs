@@ -4,12 +4,15 @@ using System.Text;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Net.Http.Headers;
 
 namespace PrzychodniaAlfred
 {
     public partial class DodajUzytkownikaWindow : Window
     {
         private readonly HttpClient _httpClient = new HttpClient();
+
+        private bool isEdycja => this.Tag is int;
 
         public DodajUzytkownikaWindow()
         {
@@ -25,8 +28,7 @@ namespace PrzychodniaAlfred
             string rola = (cmbRola.SelectedItem as ComboBoxItem)?.Content.ToString();
             string specjalizacja = txtSpecjalizacja.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(haslo) ||
-                string.IsNullOrWhiteSpace(imie) || string.IsNullOrWhiteSpace(nazwisko) ||
+            if (string.IsNullOrWhiteSpace(imie) || string.IsNullOrWhiteSpace(nazwisko) ||
                 string.IsNullOrWhiteSpace(rola))
             {
                 MessageBox.Show("Uzupełnij wszystkie wymagane pola.");
@@ -39,22 +41,42 @@ namespace PrzychodniaAlfred
                 return;
             }
 
-            var payload = new
+            object payload;
+
+            if (isEdycja)
             {
-                login,
-                haslo,
-                imie,
-                nazwisko,
-                rola,
-                specjalizacja = rola == "L" ? specjalizacja : ""
-            };
+                payload = new
+                {
+                    id = (int)this.Tag,
+                    imie,
+                    nazwisko,
+                    rola,
+                    specjalizacja = rola == "L" ? specjalizacja : null
+                };
+            }
+            else
+            {
+                payload = new
+                {
+                    login,
+                    haslo,
+                    imie,
+                    nazwisko,
+                    rola,
+                    specjalizacja = rola == "L" ? specjalizacja : null
+                };
+            }
 
             var json = JsonSerializer.Serialize(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            string endpoint = isEdycja
+                ? "https://kineh.smallhost.pl/przychodnia/edytujuser.php"
+                : "https://kineh.smallhost.pl/przychodnia/dodajuser.php";
+
             try
             {
-                var response = await _httpClient.PostAsync("https://kineh.smallhost.pl/przychodnia/dodajuser.php", content);
+                var response = await _httpClient.PostAsync(endpoint, content);
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync();
@@ -62,13 +84,13 @@ namespace PrzychodniaAlfred
 
                 if (result?.success == true)
                 {
-                    MessageBox.Show("Użytkownik dodany.");
+                    MessageBox.Show(isEdycja ? "Użytkownik zaktualizowany." : "Użytkownik dodany.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show(result?.message ?? "Nie udało się dodać użytkownika.");
+                    MessageBox.Show(result?.message ?? "Nie udało się zapisać użytkownika.");
                 }
             }
             catch
@@ -76,6 +98,7 @@ namespace PrzychodniaAlfred
                 MessageBox.Show("Błąd połączenia z serwerem.");
             }
         }
+
         public DodajUzytkownikaWindow(User edytowany) : this()
         {
             txtLogin.Text = edytowany.Login;
@@ -84,12 +107,15 @@ namespace PrzychodniaAlfred
             cmbRola.SelectedValue = edytowany.Rola;
             txtSpecjalizacja.Text = edytowany.Specjalizacja ?? "";
 
-            // np. ukryj pole hasła, skoro to edycja
             txtHaslo.Password = "*******";
             txtHaslo.IsEnabled = false;
 
-            // przechowaj Id
             this.Tag = edytowany.Id;
+
+            // Ustawienie przycisku "Dodaj" na "Zapisz" - potrzebne nazwane odniesienie
+            var button = LogicalTreeHelper.FindLogicalNode(this, "DodajButton") as Button;
+            if (button != null)
+                button.Content = "Zapisz";
         }
 
         private void cmbRola_SelectionChanged(object sender, SelectionChangedEventArgs e)

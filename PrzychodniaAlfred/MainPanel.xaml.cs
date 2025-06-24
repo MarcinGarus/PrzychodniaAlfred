@@ -84,8 +84,10 @@ namespace PrzychodniaAlfred
             okno.ShowDialog();
         }
 
-
-
-
+        private void btnPacjenci_Click(object sender, RoutedEventArgs e)
+        {
+            var okno = new PacjenciWindow();
+            okno.ShowDialog();
+        }
     }
 }

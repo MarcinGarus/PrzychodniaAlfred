@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using PrzychodniaAlfred.Models;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
@@ -74,6 +75,21 @@ namespace PrzychodniaAlfred
             {
                 MessageBox.Show("Błąd połączenia z serwerem.");
             }
+        }
+        public DodajUzytkownikaWindow(User edytowany) : this()
+        {
+            txtLogin.Text = edytowany.Login;
+            txtImie.Text = edytowany.Imie;
+            txtNazwisko.Text = edytowany.Nazwisko;
+            cmbRola.SelectedValue = edytowany.Rola;
+            txtSpecjalizacja.Text = edytowany.Specjalizacja ?? "";
+
+            // np. ukryj pole hasła, skoro to edycja
+            txtHaslo.Password = "*******";
+            txtHaslo.IsEnabled = false;
+
+            // przechowaj Id
+            this.Tag = edytowany.Id;
         }
 
         private void cmbRola_SelectionChanged(object sender, SelectionChangedEventArgs e)

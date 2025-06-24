@@ -1,6 +1,7 @@
 ﻿// users.xaml.cs
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Windows;
 using PrzychodniaAlfred.Models;
@@ -50,17 +51,55 @@ namespace PrzychodniaAlfred
         }
 
 
-        private void Usun_Click(object sender, RoutedEventArgs e)
+        private async void Usun_Click(object sender, RoutedEventArgs e)
         {
             var zaznaczony = dgUzytkownicy.SelectedItem as User;
-            var lista = dgUzytkownicy.ItemsSource as List<User>;
-            if (zaznaczony != null && lista != null)
+            if (zaznaczony == null)
             {
-                lista.Remove(zaznaczony);
-                dgUzytkownicy.Items.Refresh();
+                MessageBox.Show("Zaznacz użytkownika do usunięcia.");
+                return;
+            }
+
+            if (MessageBox.Show($"Czy na pewno usunąć {zaznaczony.Imie} {zaznaczony.Nazwisko}?", "Potwierdź", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    var response = await httpClient.PostAsync("https://kineh.smallhost.pl/przychodnia/usunuser.php",
+                        new StringContent(JsonSerializer.Serialize(new { id = zaznaczony.Id }), Encoding.UTF8, "application/json"));
+
+                    var wynik = JsonSerializer.Deserialize<ApiResponse>(await response.Content.ReadAsStringAsync());
+
+                    if (wynik?.success == true)
+                    {
+                        MessageBox.Show("Użytkownik usunięty.");
+                        await WczytajUzytkownikow();
+                    }
+                    else
+                    {
+                        MessageBox.Show(wynik?.message ?? "Błąd usuwania.");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Błąd połączenia.");
+                }
             }
         }
+        private async void Edytuj_Click(object sender, RoutedEventArgs e)
+        {
+            var zaznaczony = dgUzytkownicy.SelectedItem as User;
+            if (zaznaczony == null)
+            {
+                MessageBox.Show("Zaznacz użytkownika do edycji.");
+                return;
+            }
 
+            var okno = new DodajUzytkownikaWindow(zaznaczony);
+            if (okno.ShowDialog() == true)
+            {
+                await WczytajUzytkownikow();
+            }
+        }
         private async void Zapisz_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Tu będzie zapisywanie zmian do bazy przez API (do zrobienia 🚧)");

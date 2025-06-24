@@ -78,6 +78,11 @@ namespace PrzychodniaAlfred
                 MessageBox.Show("Błąd połączenia z serwerem:\n" + ex.Message);
             }
         }
+        private void btnKalendarz_Click(object sender, RoutedEventArgs e)
+        {
+            var okno = new KalendarzWizytWindow();
+            okno.ShowDialog();
+        }
 
 
 

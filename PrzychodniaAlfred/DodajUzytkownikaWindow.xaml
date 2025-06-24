@@ -5,19 +5,19 @@
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Login -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Haslo -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Imię -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Nazwisko -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Rola -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Specjalizacja -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Przycisk -->
+            
         </Grid.RowDefinitions>
 
         <TextBlock Text="Login:" Grid.Row="0" Margin="0,0,0,5"/>
@@ -44,6 +44,7 @@
             <TextBox x:Name="txtSpecjalizacja" Margin="60,0,0,0"/>
         </StackPanel>
 
-        <Button Content="Dodaj" Grid.Row="6" Margin="0,10,0,0" Click="Dodaj_Click"/>
+        <Button x:Name="DodajButton" Content="Dodaj" Grid.Row="6" Margin="0,10,0,0" Click="Dodaj_Click"/>
+
     </Grid>
 </Window>

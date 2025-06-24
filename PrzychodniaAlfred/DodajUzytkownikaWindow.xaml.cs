@@ -112,7 +112,7 @@ namespace PrzychodniaAlfred
 
             this.Tag = edytowany.Id;
 
-            // Ustawienie przycisku "Dodaj" na "Zapisz" - potrzebne nazwane odniesienie
+            // przy edycji tekst guzika "dodaj-> zapisz"
             var button = LogicalTreeHelper.FindLogicalNode(this, "DodajButton") as Button;
             if (button != null)
                 button.Content = "Zapisz";

@@ -9,6 +9,11 @@
         public string Nazwisko { get; set; }
 
         public string? Specjalizacja { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Imie} {Nazwisko}";
+        }
     }
 }
 

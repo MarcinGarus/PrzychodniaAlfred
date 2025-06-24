@@ -20,11 +20,11 @@
         </DataGrid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Content="Odśwież" Width="80" Margin="5" Click="Odswiez_Click"/>
+            <Button Content="Odśwież" Width="80" Click="Odswiez_Click" Margin="0,0,300,0" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Content="Dodaj" Width="80" Margin="5" Click="Dodaj_Click"/>
             <Button Content="Edytuj" Width="80" Margin="5" Click="Edytuj_Click"/>
             <Button Content="Usuń" Width="80" Margin="5" Click="Usun_Click"/>
-            
+
         </StackPanel>
     </Grid>
 </Window>

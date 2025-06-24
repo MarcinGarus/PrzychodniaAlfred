@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using PrzychodniaAlfred.Models;
+using System.Net.Http;
+using System.Text.Json;
+using System.Windows;
 
 namespace PrzychodniaAlfred
 {
@@ -52,9 +55,36 @@ namespace PrzychodniaAlfred
             Close();
         }
 
-        private void btnWizyty_Click(object sender, RoutedEventArgs e)
+        private async void btnDodajWizyte_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Pobierz lekarzy
+                var lekarzeResponse = await new HttpClient().GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzlekarzy.php");
+                MessageBox.Show("Lekarze JSON:\n" + lekarzeResponse);
+                var lekarze = JsonSerializer.Deserialize<List<User>>(lekarzeResponse);
 
+                // Pobierz pacjentów
+                var pacjenciResponse = await new HttpClient().GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzpacjentow.php");
+                MessageBox.Show("Pacjenci JSON:\n" + pacjenciResponse);
+                var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(pacjenciResponse);
+                    
+                if (lekarze == null || pacjenci == null)
+                {
+                    MessageBox.Show("Nie udało się pobrać danych.");
+                    return;
+                }
+
+                var okno = new DodajWizyteWindow(lekarze, pacjenci);
+                okno.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd połączenia z serwerem:\n" + ex.Message);
+            }
         }
+
+
+
     }
 }

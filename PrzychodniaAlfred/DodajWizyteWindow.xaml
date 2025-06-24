@@ -1,0 +1,44 @@
+﻿<Window x:Class="PrzychodniaAlfred.DodajWizyteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dodaj wizytę" Height="340" Width="360"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5">
+            <TextBlock Text="Lekarz:" Width="80" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cmbLekarz" Width="220"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5">
+            <TextBlock Text="Pacjent:" Width="80" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cmbPacjent" Width="220"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5">
+            <TextBlock Text="Data:" Width="80" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dataPicker" Width="220"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,5">
+            <TextBlock Text="Godzina:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="godzinaBox" Width="100" Text="12:00"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Margin="0,10,0,0">
+            <TextBlock Text="Opis:"/>
+            <TextBox x:Name="txtOpis" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </StackPanel>
+
+        <Button Grid.Row="5" Content="Zapisz wizytę" Click="Zapisz_Click"
+                Margin="0,10,0,0" HorizontalAlignment="Right" Width="120"/>
+    </Grid>
+</Window>

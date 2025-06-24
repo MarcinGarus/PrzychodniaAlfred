@@ -59,21 +59,16 @@ namespace PrzychodniaAlfred
         {
             try
             {
-                // Pobierz lekarzy
-                var lekarzeResponse = await new HttpClient().GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzlekarzy.php");
-                MessageBox.Show("Lekarze JSON:\n" + lekarzeResponse);
-                var lekarze = JsonSerializer.Deserialize<List<User>>(lekarzeResponse);
+                var http = new HttpClient();
 
-                // Pobierz pacjentów
-                var pacjenciResponse = await new HttpClient().GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzpacjentow.php");
-                MessageBox.Show("Pacjenci JSON:\n" + pacjenciResponse);
-                var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(pacjenciResponse);
-                    
-                if (lekarze == null || pacjenci == null)
-                {
-                    MessageBox.Show("Nie udało się pobrać danych.");
-                    return;
-                }
+                var lekarzeJson = await http.GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzlekarzy.php");
+                var pacjenciJson = await http.GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzpacjentow.php");
+
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var lekarze = JsonSerializer.Deserialize<List<User>>(lekarzeJson, options);
+                var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(pacjenciJson, options);
+
+                MessageBox.Show($"Lekarzy: {lekarze?.Count ?? 0}, Pacjentów: {pacjenci?.Count ?? 0}");
 
                 var okno = new DodajWizyteWindow(lekarze, pacjenci);
                 okno.ShowDialog();
@@ -83,6 +78,7 @@ namespace PrzychodniaAlfred
                 MessageBox.Show("Błąd połączenia z serwerem:\n" + ex.Message);
             }
         }
+
 
 
 

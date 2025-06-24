@@ -12,6 +12,7 @@ namespace PrzychodniaAlfred.Models
         public string Telefon { get; set; }
         public string Email { get; set; }
 
+        public string FullName => $"{Imie} {Nazwisko}";
         public override string ToString() => Nazwisko;
     }
 }

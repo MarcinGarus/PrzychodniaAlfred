@@ -1,6 +1,7 @@
 ﻿<Window x:Class="PrzychodniaAlfred.DodajWizyteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Dodaj wizytę" Height="340" Width="360"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
@@ -25,7 +26,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5">
             <TextBlock Text="Data:" Width="80" VerticalAlignment="Center"/>
-            <DatePicker x:Name="dataPicker" Width="220"/>
+            <DatePicker x:Name="dataPicker" Width="220" SelectedDate="{x:Static sys:DateTime.Now}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,5">

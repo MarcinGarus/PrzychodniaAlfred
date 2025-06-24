@@ -10,6 +10,7 @@
 
         public string? Specjalizacja { get; set; }
 
+        public string FullName => $"{Imie} {Nazwisko}";
         public override string ToString()
         {
             return $"{Imie} {Nazwisko}";

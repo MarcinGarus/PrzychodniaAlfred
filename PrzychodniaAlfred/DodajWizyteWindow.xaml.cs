@@ -21,10 +21,19 @@ namespace PrzychodniaAlfred
             this.lekarze = lekarze ?? new List<User>();
             this.pacjenci = pacjenci ?? new List<Pacjent>();
 
-            cmbLekarz.ItemsSource = this.lekarze;
-            cmbPacjent.ItemsSource = this.pacjenci;
+            Loaded += DodajWizyteWindow_Loaded;
+        }
 
-            dataPicker.SelectedDate = DateTime.Now;
+        private void DodajWizyteWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            cmbLekarz.ItemsSource = lekarze;
+            cmbPacjent.ItemsSource = pacjenci;
+
+            if (cmbLekarz.Items.Count > 0)
+                cmbLekarz.SelectedIndex = 0;
+
+            if (cmbPacjent.Items.Count > 0)
+                cmbPacjent.SelectedIndex = 0;
         }
 
         private async void Zapisz_Click(object sender, RoutedEventArgs e)
@@ -66,17 +75,14 @@ namespace PrzychodniaAlfred
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var result = JsonSerializer.Deserialize<ApiResponse>(responseBody, options);
 
                 if (result?.success == true)
                 {
                     MessageBox.Show("Wizyta zapisana.");
-                    this.DialogResult = true;
-                    this.Close();
+                    DialogResult = true;
+                    Close();
                 }
                 else
                 {

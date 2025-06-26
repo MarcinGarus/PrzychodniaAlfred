@@ -1,15 +1,16 @@
 ﻿<Window x:Class="PrzychodniaAlfred.KalendarzWizytWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Kalendarz wizyt" Height="500" Width="500">
+        Title="Kalendarz wizyt" Height="600" Width="520">
     <StackPanel Margin="10">
         <TextBlock Text="Wybierz datę:" FontWeight="Bold" Margin="0,0,0,5"/>
+
         <Calendar x:Name="kalendarz"
-          SelectedDatesChanged="kalendarz_SelectedDatesChanged"
-          FontSize="20"
-          Width="400"
-          Height="300"
-          Margin="0,0,0,10"/>
+                  SelectedDatesChanged="kalendarz_SelectedDatesChanged"
+                  FontSize="24"
+                  Width="480"
+                  Height="380"
+                  Margin="0,0,0,12"/>
 
         <TextBlock Text="Wizyty tego dnia:" FontWeight="Bold" Margin="10,10,0,5"/>
         <ListBox x:Name="listaWizyt" Height="250"/>

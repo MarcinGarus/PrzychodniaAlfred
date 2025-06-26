@@ -68,7 +68,7 @@ namespace PrzychodniaAlfred
                 var lekarze = JsonSerializer.Deserialize<List<User>>(lekarzeJson, options);
                 var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(pacjenciJson, options);
 
-                MessageBox.Show($"Lekarzy: {lekarze?.Count ?? 0}, Pacjentów: {pacjenci?.Count ?? 0}");
+                //MessageBox.Show($"Lekarzy: {lekarze?.Count ?? 0}, Pacjentów: {pacjenci?.Count ?? 0}");
 
                 var okno = new DodajWizyteWindow(lekarze, pacjenci);
                 okno.ShowDialog();
@@ -87,6 +87,11 @@ namespace PrzychodniaAlfred
         private void btnPacjenci_Click(object sender, RoutedEventArgs e)
         {
             var okno = new PacjenciWindow();
+            okno.ShowDialog();
+        }
+        private void btnUrlopy_click(object sender, RoutedEventArgs e)
+        {
+               var okno = new UrlopyWindow();
             okno.ShowDialog();
         }
     }

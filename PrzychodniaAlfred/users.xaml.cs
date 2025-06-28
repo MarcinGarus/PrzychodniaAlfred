@@ -100,10 +100,7 @@ namespace PrzychodniaAlfred
                 await WczytajUzytkownikow();
             }
         }
-        private async void Zapisz_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Tu będzie zapisywanie zmian do bazy przez API (do zrobienia 🚧)");
-        }
+
         public class ApiResponse
         {
             public bool success { get; set; }

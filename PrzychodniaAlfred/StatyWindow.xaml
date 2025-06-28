@@ -1,0 +1,12 @@
+﻿<Window x:Class="PrzychodniaAlfred.StatyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Statystyki lekarzy" Height="400" Width="600" Background="#FF96A4F3">
+    <StackPanel Margin="10">
+        <TextBlock Text="Statystyki lekarzy:" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+        <ListBox x:Name="listaStatystyk" Height="250" Margin="0,0,0,10"/>
+
+        <Button x:Name="btnZapiszStatystyki" Content="Zapisz do pliku" Width="150" Click="btnZapiszStatystyki_Click"/>
+    </StackPanel>
+</Window>

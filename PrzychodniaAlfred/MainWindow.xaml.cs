@@ -1,9 +1,11 @@
-﻿using System.Net.Http;
+﻿using PrzychodniaAlfred.Models;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using PrzychodniaAlfred.Models;
+using System.Windows.Threading;
+    
 
 namespace PrzychodniaAlfred
 {
@@ -16,6 +18,16 @@ namespace PrzychodniaAlfred
         {
             InitializeComponent();
         }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+            await Task.Delay(2000);
+
+            SplashGrid.Visibility = Visibility.Collapsed;
+            MainUI.Visibility = Visibility.Visible;
+        }
+
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {

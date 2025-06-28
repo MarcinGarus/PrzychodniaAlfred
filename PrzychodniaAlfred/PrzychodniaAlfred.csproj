@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="9.3.0" />
-	  <Reference Include="PresentationFramework" />
-	  <Reference Include="PresentationCore" />
-	  <Reference Include="WindowsBase" />
+    <None Remove="Images\koteg.png" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.3.0" />
+      <Reference Include="PresentationFramework" />
+      <Reference Include="PresentationCore" />
+      <Reference Include="WindowsBase" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\koteg.png" />
   </ItemGroup>
 
 </Project>

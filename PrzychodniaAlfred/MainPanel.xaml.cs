@@ -91,8 +91,40 @@ namespace PrzychodniaAlfred
         }
         private void btnUrlopy_click(object sender, RoutedEventArgs e)
         {
-               var okno = new UrlopyWindow();
+            var okno = new UrlopyWindow();
             okno.ShowDialog();
         }
+        private async void btnStatystyki_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var http = new HttpClient();
+                var dzisiaj = DateTime.Now.ToString("yyyy-MM-dd"); 
+
+                var response = await http.GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzwizyty.php?data=" + dzisiaj);
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var wizyty = JsonSerializer.Deserialize<List<Wizyta>>(response, options);
+
+                if (wizyty == null || wizyty.Count == 0)
+                {
+                    MessageBox.Show("Brak wizyt na dziś.");
+                    return;
+                }
+
+                // Grupa lekarzy + liczba wizyt
+                var staty = wizyty
+                    .GroupBy(w => $"{w.LekarzImie} {w.LekarzNazwisko}")
+                    .Select(grupa => $"{grupa.Key} - {grupa.Count()} wizyt")
+                    .ToList();
+
+                var okno = new StatyWindow(staty);
+                okno.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd ładowania statystyk:\n" + ex.Message);
+            }
+        }
+
     }
 }

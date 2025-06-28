@@ -12,9 +12,9 @@
             <Button x:Name="btnDodajWizyte" Content="Dodaj Wizyte" Margin="5" Width="150" Height="50" Click="btnDodajWizyte_Click"/>
             <Button x:Name="btnKalendarz" Content="Kalendarz wizyt" Margin="5" Width="150" Height="50" Click="btnKalendarz_Click"/>
             <Button x:Name="btnUrlopy" Content="Urlopy" Margin="5" Width="150" Height="50" Click="btnUrlopy_click"/>
-            <Button x:Name="btnStatystyki" Content="Statystyki" Margin="5" Width="150" Height="50"/>
+            <Button x:Name="btnStatystyki" Content="Statystyki" Margin="5" Width="150" Height="50" Click="btnStatystyki_Click"/>
             <Button x:Name="btnPacjenci" Content="Pacjenci" Margin="5" Width="150" Height="50" Click="btnPacjenci_Click"/>
-            <Button x:Name="btnWyloguj" Content="Wyloguj" Width="150" Height="50"/>
+            <Button x:Name="btnWyloguj" Content="Wyloguj"   Margin="5" Width="150" Height="50"/>
 
 
         </WrapPanel>

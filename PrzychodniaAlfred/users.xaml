@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PrzychodniaAlfred.users"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Zarządzanie użytkownikami" Height="450" Width="700" Background="{x:Null}">
+        Title="Zarządzanie użytkownikami" Height="450" Width="700" Background="#FF96A4F3">
     <Grid Margin="10">
         <DataGrid x:Name="dgUzytkownicy"
                   AutoGenerateColumns="False"

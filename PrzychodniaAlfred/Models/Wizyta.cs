@@ -14,6 +14,8 @@ namespace PrzychodniaAlfred.Models
         public string PacjentImie { get; set; }
         public string PacjentNazwisko { get; set; }
         public string Opis { get; set; }
+
+        public string DataWizyty { get; set; }
     }
 }
 

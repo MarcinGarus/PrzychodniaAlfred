@@ -1,12 +1,26 @@
 ﻿<Window x:Class="PrzychodniaAlfred.StatyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Statystyki lekarzy" Height="400" Width="600" Background="#FF96A4F3">
-    <StackPanel Margin="10">
-        <TextBlock Text="Statystyki lekarzy:" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+        Title="Statystyki" Height="450" Width="600" Background="#FF96A4F3"
+        Loaded="StatyWindow_Loaded">
 
+
+    <StackPanel Margin="10">
+
+        
+        <ComboBox x:Name="comboTypStatystyki" Width="200" Margin="0,0,0,10" SelectionChanged="comboTyp">
+            <ComboBoxItem Content="Lekarze" IsSelected="True"/>
+            <ComboBoxItem Content="Pacjenci"/>
+        </ComboBox>
+
+        
+        <TextBlock x:Name="naglowekStatystyk" Text="Statystyki lekarzy:" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+        
         <ListBox x:Name="listaStatystyk" Height="250" Margin="0,0,0,10"/>
 
-        <Button x:Name="btnZapiszStatystyki" Content="Zapisz do pliku" Width="150" Click="btnZapiszStatystyki_Click"/>
+        
+        <Button x:Name="btnRaport" Content="Raport - lekarze" Width="200" Click="btnRaport_Click"/>
+
     </StackPanel>
 </Window>

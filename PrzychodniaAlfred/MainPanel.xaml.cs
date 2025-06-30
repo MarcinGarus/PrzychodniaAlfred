@@ -1,4 +1,5 @@
 ﻿using PrzychodniaAlfred.Models;
+using PrzychodniaAlfred.Statystyki;
 using System.Net.Http;
 using System.Text.Json;
 using System.Windows;
@@ -99,9 +100,9 @@ namespace PrzychodniaAlfred
             try
             {
                 var http = new HttpClient();
-                var dzisiaj = DateTime.Now.ToString("yyyy-MM-dd"); 
+                var dzisiaj = DateTime.Now.ToString("yyyy-MM-dd");
 
-                var response = await http.GetStringAsync("https://kineh.smallhost.pl/przychodnia/pobierzwizyty.php?data=" + dzisiaj);
+                var response = await http.GetStringAsync("https://kineh.smallhost.pl/przychodnia/wszystkiewizyty.php");
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var wizyty = JsonSerializer.Deserialize<List<Wizyta>>(response, options);
 
@@ -111,20 +112,24 @@ namespace PrzychodniaAlfred
                     return;
                 }
 
-                // Grupa lekarzy + liczba wizyt
+                
                 var staty = wizyty
                     .GroupBy(w => $"{w.LekarzImie} {w.LekarzNazwisko}")
-                    .Select(grupa => $"{grupa.Key} - {grupa.Count()} wizyt")
+                    .Select(grupa => new LekStaty(grupa.Key, grupa.Count()))
+                    .Cast<InterfejsRaportu>() 
                     .ToList();
 
                 var okno = new StatyWindow(staty);
                 okno.ShowDialog();
+
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Błąd ładowania statystyk:\n" + ex.Message);
+                //MessageBox.Show("Błąd ładowania statystyk:\n" + ex.Message);
             }
         }
+
 
     }
 }

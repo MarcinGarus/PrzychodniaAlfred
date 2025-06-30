@@ -2,15 +2,15 @@
 
 namespace PrzychodniaAlfred.Statystyki
 {
-    public class LekStaty : Raport, InterfejsRaportu
+    public class PacjentStaty : Raport, InterfejsRaportu
     {
         public string Nazwa { get; set; }
         public int Wartosc { get; set; }
 
-        public LekStaty(string nazwa, int liczbaWizyt)
+        public PacjentStaty(string nazwa, int wartosc)
         {
             Nazwa = nazwa;
-            Wartosc = liczbaWizyt;
+            Wartosc = wartosc;
         }
 
         public string GenerujRaport()
@@ -20,7 +20,7 @@ namespace PrzychodniaAlfred.Statystyki
 
         public override string ToString()
         {
-            return $"{Nazwa} - Ilość wizyt:{Wartosc} ";
+            return $"{Nazwa} - Ilość wizyt:{Wartosc}";
         }
     }
 }

@@ -8,8 +8,13 @@ Aplikacja napisana w języku C# (Windows Forms), służąca do rejestracji pacje
 - Walidacja danych (np. numer PESEL, imię, nazwisko)
 - Prosty i intuicyjny interfejs graficzny (Windows Forms)
 - ## Zrzuty ekranu
-![Ekran główny](tu wrzucę link do zdjęcia)
-![Formularz pacjenta](tu wrzucę link do zdjęcia)
+![Alfred logowanie](https://github.com/user-attachments/assets/5c52c73e-9862-4421-bdd6-e8f56c8f1047)
+![Alfred menu główne](https://github.com/user-attachments/assets/6b0071c4-c8cd-427f-8ab1-12dfc787a882)
+![Alfred użytkownicy](https://github.com/user-attachments/assets/03d3f64d-4229-4df8-997d-62e8819540fd)
+![Alfred urlopy](https://github.com/user-attachments/assets/a1d333d4-43b2-4f38-b50d-ccd85183c06a)
+![Alfred wizyty2](https://github.com/user-attachments/assets/6d0953c7-a162-4996-9d62-76370ffac087)
+![Alfred pacjęci](https://github.com/user-attachments/assets/21ca1982-de08-4911-ae7b-f39fc004547d)
+![Alfred kalendarz wizyt](https://github.com/user-attachments/assets/a5f6c393-85c7-4a43-a53d-1591e7dd2717)
 ## Wymagania
 - .NET Framework 4.7.2 lub nowszy
 - Windows 10/11

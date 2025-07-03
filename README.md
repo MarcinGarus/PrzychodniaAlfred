@@ -78,7 +78,9 @@ Widok kalendarza
   - **DB/**
     - przychodDB.sql – struktura bazy MySQL
 
-
+#TODO PRZYSZŁOŚCIOWE
+-walidacja wprowadzanych danych
+-rozbudowanie statystyk
 ## Autor
 Projekt stworzony przez [Iga Gocył, Mateusz Kaczmarczyk, Marcin Garus] w ramach realizacji nauki przedmiotu Programowania obiektowe.
 ## Licencja

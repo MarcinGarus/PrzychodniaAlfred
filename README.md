@@ -34,51 +34,50 @@ Widok kalendarza
 - Visual Studio 2022 (lub nowszy)
 - Serwer z obsługą PHP
 - Baza danych MySQL
-## Struktura projektu
-PrzychodniaAlfred/
-│
-├── WPFApp/                   # Aplikacja desktopowa
-│   ├── App.xaml
-│   ├── MainWindow.xaml
-│   ├── MainPanel.xaml
-│   ├── DodajWizyteWindow.xaml
-│   ├── DodajUzytkownikaWindow.xaml
-│   ├── KalendarzWizydWindow.xaml
-│   ├── StatyWindow.xaml
-│   ├── PacjenciWindow.xaml
-│   ├── UrlopyWindow.xaml
-│   ├── users.xaml
-│   ├── Models/               
-│   │   ├── User.cs
-│   │   ├── Wizyta.cs
-│   │   ├── Pacjent.cs
-│   │   ├── PacjentStaty.cs
-│   │   ├── LekStaty.cs
-│   │   ├── LoginResponse.cs
-│   │   └── Interfejsy.cs
-│   ├── images/
-│   │   ├── koteg.png
-│   
-│       
-│
-├── PHPapi/                   # API w PHP (backend)
-│   ├── db.php
-│   ├── dodajpacjenta.php
-│   ├── dodajurlop.php
-│   ├── dodajuser.php
-│   ├── dodajwizyte.php
-│   ├── edytujuser.php
-│   ├── login.php
-│   ├── pobierzlekarzy.php
-│   ├── pobierzpacjentow.php
-│   ├── pobierzulropy.php
-│   ├── pobierzwizyty.php
-│   ├── users.php
-│   ├── usunuser.php
-│   └── wszystkiewizyty.php
-│
-└── DB/
-    └── przychodDB.sql       # Struktura bazy danych MySQL
+##  Struktura projektu
+
+- **PrzychodniaAlfred/**
+  - **WPFApp/** – Aplikacja desktopowa (C#, WPF)
+    - App.xaml  
+    - MainWindow.xaml  
+    - MainPanel.xaml  
+    - DodajWizyteWindow.xaml  
+    - DodajUzytkownikaWindow.xaml  
+    - KalendarzWizydWindow.xaml  
+    - StatyWindow.xaml  
+    - PacjenciWindow.xaml  
+    - UrlopyWindow.xaml  
+    - users.xaml  
+    - **Models/**
+      - User.cs  
+      - Wizyta.cs  
+      - Pacjent.cs  
+      - PacjentStaty.cs  
+      - LekStaty.cs  
+      - LoginResponse.cs  
+      - Interfejsy.cs  
+    - **images/**
+      - koteg.png  
+
+  - **PHPapi/** – Backend (API w PHP)
+    - db.php  
+    - dodajpacjenta.php  
+    - dodajurlop.php  
+    - dodajuser.php  
+    - dodajwizyte.php  
+    - edytujuser.php  
+    - login.php  
+    - pobierzlekarzy.php  
+    - pobierzpacjentow.php  
+    - pobierzulropy.php  
+    - pobierzwizyty.php  
+    - users.php  
+    - usunuser.php  
+    - wszystkiewizyty.php  
+
+  - **DB/**
+    - przychodDB.sql – struktura bazy MySQL
+
 
 ## Autor
 Projekt stworzony przez [Iga Gocył, Mateusz Kaczmarczyk, Marcin Garus] w ramach realizacji nauki przedmiotu Programowania obiektowe.

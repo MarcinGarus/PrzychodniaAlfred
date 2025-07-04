@@ -78,6 +78,69 @@ Widok kalendarza
   - **DB/**
     - przychodDB.sql – struktura bazy MySQL
 
+## Dziedziczenie i użycie bibliotek w projekcie *PrzychodniaAlfred*
+
+### 1. Przykłady dziedziczenia
+
+| Plik | Deklaracja | Dziedziczone / implementowane | Cel |
+|------|-----------|------------------------------|-----|
+| `Models/LekStaty.cs` | `public class LekStaty : Raport, IInterfejsRaportu` | • **Raport** (klasa bazowa z właściwościami `Nazwa`, `Wartosc`) <br>• **IInterfejsRaportu** (wymusza `GenerujRaport()`) |  Obiekt spełnia dwa kontrakty: reprezentuje wiersz raportu i potrafi się sam wygenerować. |
+| `Models/PacjentStaty.cs` | `public class PacjentStaty : Raport, IInterfejsRaportu` | Jak wyżej, ale dla statystyk pacjentów. |  |
+| `App.xaml.cs` | `public partial class App : Application` | **System.Windows.Application** | Uzyskuje cały cykl życia aplikacji WPF. |
+| `*.Window.xaml.cs` (np. `MainWindow`) | `public partial class MainWindow : Window` | **System.Windows.Window** | Każde okno „dostaje” zdarzenia, renderowanie i binding WPF. |
+
+> **Wielokrotne dziedziczenie w stylu C#**  
+> Klasa może dziedziczyć **tylko jedną** klasę bazową, ale **dowolną liczbę interfejsów**. Dzięki temu logika raportów pozostaje odseparowana od UI.
+
+---
+
+### 2. Używane biblioteki (`using …;`)
+
+| Fragment kodu | Biblioteka | Funkcjonalność |
+|---------------|-----------|----------------|
+using System.Net.Http;
+using System.Text.Json;
+
+using var http = new HttpClient();
+string json = await http.GetStringAsync(url);
+var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(json);
+| **System.Net.Http** <br>**System.Text.Json** | Pobieranie danych z API i deserializacja JSON do listy `Pacjent`. |
+|
+using System.Data;
+//using MySql.Data.MySqlClient;
+| **System.Data** (ADO.NET) <br>**MySql.Data.MySqlClient** (opcjonalnie) | Planowane połączenie z MySQL, zapytania SQL, wypełnianie `DataTable`. |
+|
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+| **PresentationFramework / PresentationCore** | Kontrolki, kolory, zdarzenia — kompletny stack WPF. |
+|
+using System.Collections.Generic;
+| **mscorlib** | Kolekcje generyczne (`List<T>`, `Dictionary<K,V>`). |
+
+
+### 3. Jak warstwy współpracują?
+
+1. **Modele / Statystyki**  
+   Implementują interfejsy i dziedziczą po bazowych klasach raportów.  
+2. **Prezentacja (WPF)**  
+   Klasy okien dziedziczą po `Window`, korzystając z bibliotek .NET (HTTP, JSON).  
+3. **Dostęp do danych** *(opcjonalnie)*  
+   Klasa `Database` (zakomentowana) miała korzystać z MySQL Connector, co pokazałoby współpracę z biblioteką zewnętrzną.
+
+// Przykład pobrania pacjentów
+private async void ZaladujPacjentow()
+{
+    using var http = new HttpClient();
+    string url = "https://kineh.smallhost.pl/przychodnia/pobierzpacjentow.php";
+    var pacjenci = JsonSerializer.Deserialize<List<Pacjent>>(
+        await http.GetStringAsync(url),
+        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+    listaPacjentow.ItemsSource = pacjenci;
+}
+
+
 #TODO PRZYSZŁOŚCIOWE
 -walidacja wprowadzanych danych
 -rozbudowanie statystyk

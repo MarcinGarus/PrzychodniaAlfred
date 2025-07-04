@@ -140,10 +140,47 @@ private async void ZaladujPacjentow()
     listaPacjentow.ItemsSource = pacjenci;
 }
 
+## Polimorfizm w projekcie *PrzychodniaAlfred*
+Polimorfizm oparty na interfejsie `InterfejsRaportu`. Pozwala to na obsługę różnych typów raportów (`LekStaty`, `PacjentStaty`) w sposób jednolity, bez potrzeby znajomości ich konkretnych klas w miejscu użycia (np. w `StatyWindow`).
 
-#TODO PRZYSZŁOŚCIOWE
--walidacja wprowadzanych danych
--rozbudowanie statystyk
+Dzięki temu można np. z łatwością dodawać kolejne typy raportów w przyszłości — wystarczy, że będą implementować `InterfejsRaportu`.
+
+
+| Klasa           | Bazowa klasa | Implementowany interfejs | Kluczowa metoda        | Zastosowanie                                                  |
+|------------------|---------------|----------------------------|-------------------------|----------------------------------------------------------------|
+| `LekStaty`        | `Raport`      | `InterfejsRaportu`         | `GenerujRaport()`       | Generuje raport wizyt przypisanych do lekarzy.                |
+| `PacjentStaty`    | `Raport`      | `InterfejsRaportu`         | `GenerujRaport()`       | Generuje raport wizyt przypisanych do pacjentów.              |
+| `StatyWindow`     | —             | —                          | używa `InterfejsRaportu` | Przechowuje i wywołuje metody na liście raportów polimorficznie.|
+
+
+
+
+## Hermetyzacja w projekcie *PrzychodniaAlfred*
+
+W projekcie przykładem hermetyzacji jest klasa `Pacjent`, która zawiera dane wrażliwe użytkownika, takie jak PESEL, numer telefonu czy e-mail.
+Metody 'get' i 'set' umożliwiają kontrolowany dostęp do prywatnych pól klasy.
+
+
+| Składnik       | Modyfikator dostępu | Cel hermetyzacji                                      |
+|----------------|---------------------|--------------------------------------------------------|
+| `Id`           | `public`            | Unikalny identyfikator pacjenta.                       |
+| `Imie`         | `public`            | Udostępniane jawnie jako część tożsamości.             |
+| `Nazwisko`     | `public`            | Udostępniane jawnie jako część tożsamości.             |
+| `Pesel`        | `public`            | Zmienna zawiera dane wrażliwe — warto ograniczyć dostęp. |
+| `Telefon`      | `public`            | Dane kontaktowe — mogą wymagać walidacji przy zmianie. |
+| `Email`        | `public`            | Dane kontaktowe — potencjalnie używane do komunikacji. |
+| `DataUrodzenia`| `public`            | Informacja prywatna — może być używana w raportach.    |
+| `FullName`     | `public (tylko get)`| Właściwość tylko do odczytu — składane imię i nazwisko. |
+
+
+
+
+
+
+## TODO PRZYSZŁOŚCIOWE:
+- [ ] Dodanie walidacji wprowadzanych danych (np. PESEL, e-mail, telefon)
+- [ ] Rozbudowanie systemu statystyk (np. filtrowanie, eksport CSV, wykresy)
+
 ## Autor
 Projekt stworzony przez [Iga Gocył, Mateusz Kaczmarczyk, Marcin Garus] w ramach realizacji nauki przedmiotu Programowania obiektowe.
 ## Licencja
